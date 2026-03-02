@@ -1,6 +1,6 @@
 import sys
 
-def greet(name):
+def greet_to_user(name):
     message = "Hello, " + name
     return message
 
