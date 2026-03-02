@@ -5,11 +5,10 @@ def greet(name):
     message = "Hello, " + name
     return message
 
-def main():
+def main() -> int:
     name = sys.argv[1]
     try:
-        print(greet(name))
-        sys.stdout.flush()
+        print(greet(name), flush=True)
     except BrokenPipeError:
         devnull_fd = None
         try:
@@ -20,7 +19,8 @@ def main():
         finally:
             if devnull_fd is not None:
                 os.close(devnull_fd)
-        sys.exit(0)
+        return 0
+    return 0
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
