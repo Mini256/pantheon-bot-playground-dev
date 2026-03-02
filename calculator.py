@@ -28,3 +28,10 @@ def power(base, exp):
 def average(numbers):
     # BUG: no empty list check
     return sum(numbers) / len(numbers)
+
+
+def factorial(n):
+    # BUG: no check for negative n
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
