@@ -12,3 +12,6 @@ class SimpleCache:
     def delete(self, key):
         # BUG: KeyError if key not found
         del self.data[key]
+
+    def size(self):
+        return len(self.data)
