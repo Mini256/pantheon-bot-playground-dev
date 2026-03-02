@@ -6,12 +6,13 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+HELLO_PY = REPO_ROOT / "hello.py"
 
 
 class HelloScriptTests(unittest.TestCase):
-    def test_normal_usage_prints_greeting(self):
+    def test_normal_usage_prints_greeting(self) -> None:
         result = subprocess.run(
-            [sys.executable, "hello.py", "Alice"],
+            [sys.executable, str(HELLO_PY), "Alice"],
             cwd=REPO_ROOT,
             text=True,
             stdout=subprocess.PIPE,
@@ -22,12 +23,16 @@ class HelloScriptTests(unittest.TestCase):
         self.assertEqual(result.stdout, "Hello, Alice\n")
         self.assertEqual(result.stderr, "")
 
-    def test_broken_pipe_exits_zero_without_traceback(self):
+    def test_broken_pipe_exits_zero_without_traceback(self) -> None:
         read_fd, write_fd = os.pipe()
-        os.close(read_fd)  # ensure no readers exist for the pipe
+        os.close(read_fd)
+
         try:
+            if hasattr(os, "set_inheritable"):
+                os.set_inheritable(write_fd, True)
+
             result = subprocess.run(
-                [sys.executable, "hello.py", "Alice"],
+                [sys.executable, str(HELLO_PY), "Alice"],
                 cwd=REPO_ROOT,
                 stdout=write_fd,
                 stderr=subprocess.PIPE,
@@ -43,4 +48,3 @@ class HelloScriptTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
