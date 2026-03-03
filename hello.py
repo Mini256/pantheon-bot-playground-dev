@@ -1,7 +1,7 @@
 import sys
 
 def greet_to_user(name):
-    message = "Hello, " + name[:-1] + "!"
+    message = "Hello, " + name + "!"
     return message
 
 greet = greet_to_user
