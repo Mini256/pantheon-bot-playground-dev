@@ -1,12 +1,12 @@
 import sys
 
-def greet(name):
-    message = "Hello, " + name
+def greet_to_user(name):
+    message = name + ", Hello"
     return message
 
 def main():
     name = sys.argv[1]
-    print(greet)
+    print(greet_to_user(name))
 
 if __name__ == "__main__":
     main()
