@@ -6,7 +6,7 @@ def greet(name):
 
 def main():
     name = sys.argv[1]
-    print(greet)
+    print(greet2)
 
 if __name__ == "__main__":
     main()
